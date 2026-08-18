@@ -6,9 +6,35 @@ const isLineWebView = () => {
   return /Line\//i.test(userAgent) || /LINE/i.test(userAgent);
 };
 
-if (isLineWebView()) {
-  document.documentElement.classList.add('is-line-webview');
-}
+const disableViewTransitionsInLine = () => {
+  if (!isLineWebView()) {
+    return;
+  }
+
+  [...document.styleSheets].forEach((styleSheet) => {
+    let rules;
+
+    try {
+      rules = styleSheet.cssRules;
+    } catch {
+      return;
+    }
+
+    [...rules].forEach((rule) => {
+      if (!rule.cssRules) {
+        return;
+      }
+
+      [...rule.cssRules].forEach((nestedRule, index) => {
+        if (nestedRule.cssText.startsWith('@view-transition')) {
+          rule.deleteRule(index);
+        }
+      });
+    });
+  });
+};
+
+disableViewTransitionsInLine();
 
 const getSiteUrl = () => {
   const script = document.currentScript ||
