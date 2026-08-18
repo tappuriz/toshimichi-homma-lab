@@ -1,6 +1,15 @@
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const isLineWebView = () => {
+  const userAgent = navigator.userAgent || '';
+  return /Line\//i.test(userAgent) || /LINE/i.test(userAgent);
+};
+
+if (isLineWebView()) {
+  document.documentElement.classList.add('is-line-webview');
+}
+
 const getSiteUrl = () => {
   const script = document.currentScript ||
     [...document.scripts].find((item) => item.src.endsWith('/script.js'));

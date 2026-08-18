@@ -61,10 +61,11 @@ a {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(10px);
+  view-transition-name: site-header;
 }
 
 main {
-  /* Cross-document view transitions are disabled to avoid crashes in LINE/browser webviews. */
+  view-transition-name: main-content;
 }
 
 .header-inner {
@@ -538,10 +539,40 @@ html.skip-entry-motion .hero-line {
 }
 
 /* ---------------------------------
-   Reduced-motion fallback kept for entry animations only.
+   Cross-document View Transitions
 ---------------------------------- */
 
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.is-line-webview) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+
+  html:not(.is-line-webview) ::view-transition-old(main-content) {
+    animation: vt-main-out 0.38s ease forwards;
+  }
+
+  html:not(.is-line-webview) ::view-transition-new(main-content) {
+    animation: vt-main-in 0.38s ease forwards;
+  }
+
+  html:not(.is-line-webview) ::view-transition-old(site-header),
+  html:not(.is-line-webview) ::view-transition-new(site-header) {
+    animation-duration: 0.38s;
+  }
+
+  html:not(.is-line-webview) ::view-transition-old(root),
+  html:not(.is-line-webview) ::view-transition-new(root) {
+    animation-duration: 0.38s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
   html.with-entry-motion .reveal,
   html.with-entry-motion .grid-three .card,
   .hero-line {
@@ -557,5 +588,29 @@ html.skip-entry-motion .hero-line {
   .card {
     transition: none;
     transform: none;
+  }
+}
+
+@keyframes vt-main-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes vt-main-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
