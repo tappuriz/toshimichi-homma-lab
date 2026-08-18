@@ -1,0 +1,10 @@
+# Local editor and GitHub metadata
+.vscode/
+.github/
+AGENTS.md
+
+# Common local files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
