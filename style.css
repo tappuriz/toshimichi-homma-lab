@@ -543,27 +543,25 @@ html.skip-entry-motion .hero-line {
 ---------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  html:not(.is-line-webview) {
-    @view-transition {
-      navigation: auto;
-    }
+  @view-transition {
+    navigation: auto;
   }
 
-  html:not(.is-line-webview) ::view-transition-old(main-content) {
+  ::view-transition-old(main-content) {
     animation: vt-main-out 0.38s ease forwards;
   }
 
-  html:not(.is-line-webview) ::view-transition-new(main-content) {
+  ::view-transition-new(main-content) {
     animation: vt-main-in 0.38s ease forwards;
   }
 
-  html:not(.is-line-webview) ::view-transition-old(site-header),
-  html:not(.is-line-webview) ::view-transition-new(site-header) {
+  ::view-transition-old(site-header),
+  ::view-transition-new(site-header) {
     animation-duration: 0.38s;
   }
 
-  html:not(.is-line-webview) ::view-transition-old(root),
-  html:not(.is-line-webview) ::view-transition-new(root) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation-duration: 0.38s;
   }
 }
