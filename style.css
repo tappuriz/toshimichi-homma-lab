@@ -61,11 +61,10 @@ a {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(10px);
-  view-transition-name: site-header;
 }
 
 main {
-  view-transition-name: main-content;
+  /* Cross-document view transitions are disabled to avoid crashes in LINE/browser webviews. */
 }
 
 .header-inner {
@@ -539,38 +538,10 @@ html.skip-entry-motion .hero-line {
 }
 
 /* ---------------------------------
-   Cross-document View Transitions
+   Reduced-motion fallback kept for entry animations only.
 ---------------------------------- */
 
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-
-  ::view-transition-old(main-content) {
-    animation: vt-main-out 0.38s ease forwards;
-  }
-
-  ::view-transition-new(main-content) {
-    animation: vt-main-in 0.38s ease forwards;
-  }
-
-  ::view-transition-old(site-header),
-  ::view-transition-new(site-header) {
-    animation-duration: 0.38s;
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 0.38s;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  @view-transition {
-    navigation: none;
-  }
-
   html.with-entry-motion .reveal,
   html.with-entry-motion .grid-three .card,
   .hero-line {
@@ -586,29 +557,5 @@ html.skip-entry-motion .hero-line {
   .card {
     transition: none;
     transform: none;
-  }
-}
-
-@keyframes vt-main-out {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes vt-main-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
