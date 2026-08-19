@@ -43,11 +43,21 @@ const getSiteUrl = () => {
   return new URL('.', script?.src || window.location.href).href;
 };
 
+const getPageLocale = () => {
+  const lang = document.documentElement.lang;
+
+  return lang === 'en' ? 'en' : 'ja';
+};
+
 const addOrganizationStructuredData = () => {
-  const siteUrl = getSiteUrl();
-  const aboutUrl = new URL('about.html', siteUrl).href;
-  const seminarUrl = new URL('seminar.html', siteUrl).href;
-  const commonsUrl = new URL('commons.html', siteUrl).href;
+  const rootUrl = getSiteUrl();
+  const inLanguage = getPageLocale();
+  const isEnglish = inLanguage === 'en';
+  const langPrefix = isEnglish ? 'en/' : '';
+  const siteUrl = isEnglish ? new URL('en/', rootUrl).href : rootUrl;
+  const aboutUrl = new URL(`${langPrefix}about.html`, rootUrl).href;
+  const seminarUrl = new URL(`${langPrefix}seminar.html`, rootUrl).href;
+  const commonsUrl = new URL(`${langPrefix}commons.html`, rootUrl).href;
   const currentUrl = new URL(window.location.href);
 
   currentUrl.search = '';
@@ -58,7 +68,7 @@ const addOrganizationStructuredData = () => {
   const pageDescription = document
     .querySelector('meta[name="description"]')
     ?.getAttribute('content');
-  const hommaId = `${siteUrl}#toshimichi-homma`;
+  const hommaId = `${rootUrl}#toshimichi-homma`;
   const labId = `${siteUrl}#toshimichi-homma-lab`;
   const seminarId = `${seminarUrl}#organization`;
   const commonsId = `${commonsUrl}#organization`;
@@ -87,6 +97,7 @@ const addOrganizationStructuredData = () => {
       '@id': `${currentUrl.href}#webpage`,
       url: currentUrl.href,
       name: pageTitle,
+      inLanguage,
       mainEntity: { '@id': hommaId }
     });
   } else if (pageName === 'research.html') {
@@ -96,6 +107,7 @@ const addOrganizationStructuredData = () => {
       url: currentUrl.href,
       name: pageTitle,
       description: pageDescription,
+      inLanguage,
       author: { '@id': hommaId }
     });
   } else if (pageName === 'seminar.html') {
@@ -115,6 +127,7 @@ const addOrganizationStructuredData = () => {
         url: currentUrl.href,
         name: pageTitle,
         description: pageDescription,
+        inLanguage,
         mainEntity: { '@id': seminarId },
         author: { '@id': hommaId }
       }
@@ -142,6 +155,7 @@ const addOrganizationStructuredData = () => {
         url: currentUrl.href,
         name: pageTitle,
         description: pageDescription,
+        inLanguage,
         mainEntity: { '@id': commonsId },
         author: { '@id': hommaId }
       }
@@ -162,6 +176,7 @@ const addOrganizationStructuredData = () => {
         url: siteUrl,
         name: 'Toshimichi Homma Lab.',
         alternateName: '本間利通研究室',
+        inLanguage,
         publisher: { '@id': labId },
         author: { '@id': hommaId }
       }
