@@ -1,7 +1,5 @@
-# Local editor and GitHub metadata
+# Local editor metadata
 .vscode/
-.github/
-AGENTS.md
 
 # Common local files
 .DS_Store
