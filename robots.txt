@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.osaka-ue.ac.jp/zemi/honma/sitemap.xml
+Sitemap: https://t-homma.osaka-ue.ac.jp/sitemap.xml
