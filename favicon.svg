@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Open book and circuit tree</title>
+  <circle cx="256" cy="256" r="248" fill="#062752"/>
+
+  <g fill="none" stroke="#61bceb" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 342V150"/>
+    <path d="M222 326V238L184 200"/>
+    <path d="M290 326V238L328 200"/>
+    <path d="M190 310V266L135 231"/>
+    <path d="M322 310V266L377 231"/>
+  </g>
+
+  <g fill="#61bceb">
+    <circle cx="256" cy="132" r="24"/>
+    <circle cx="176" cy="192" r="24"/>
+    <circle cx="336" cy="192" r="24"/>
+    <circle cx="122" cy="223" r="24"/>
+    <circle cx="390" cy="223" r="24"/>
+
+    <path d="M54 331c61-19 122-10 184 28v102c-55-32-113-42-174-28l-10-102Z"/>
+    <path d="M458 331c-61-19-122-10-184 28v102c55-32 113-42 174-28l10-102Z"/>
+  </g>
+
+  <path d="M256 354v110" fill="none" stroke="#062752" stroke-width="20" stroke-linecap="round"/>
+</svg>
