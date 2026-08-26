@@ -161,12 +161,15 @@ const addOrganizationStructuredData = () => {
       }
     );
   } else if (pageName === 'index.html') {
+    const labName = isEnglish ? 'Toshimichi Homma Lab.' : '本間利通研究室';
+    const labAlternateName = isEnglish ? '本間利通研究室' : 'Toshimichi Homma Lab.';
+
     graph.push(
       {
         '@type': 'Organization',
         '@id': labId,
-        name: 'Toshimichi Homma Lab.',
-        alternateName: '本間利通研究室',
+        name: labName,
+        alternateName: labAlternateName,
         url: siteUrl,
         founder: { '@id': hommaId }
       },
@@ -174,8 +177,8 @@ const addOrganizationStructuredData = () => {
         '@type': 'WebSite',
         '@id': `${siteUrl}#website`,
         url: siteUrl,
-        name: 'Toshimichi Homma Lab.',
-        alternateName: '本間利通研究室',
+        name: labName,
+        alternateName: labAlternateName,
         inLanguage,
         publisher: { '@id': labId },
         author: { '@id': hommaId }

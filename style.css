@@ -122,8 +122,7 @@ main {
 .site-nav a:focus-visible,
 .site-name:focus-visible,
 .button:focus-visible,
-.profile-link:focus-visible,
-.card:is(a):focus-visible {
+.profile-link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -291,17 +290,6 @@ html.skip-entry-motion .hero-line {
   display: flex;
   flex-direction: column;
   transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-}
-
-.card:is(a) {
-  text-decoration: none;
-  color: inherit;
-}
-
-.card:is(a):hover {
-  transform: translateY(-4px);
-  border-color: rgba(24, 60, 52, 0.4);
-  background: rgba(255, 255, 255, 0.72);
 }
 
 .index {
