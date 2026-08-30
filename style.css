@@ -507,7 +507,7 @@ html.skip-entry-motion .hero-line {
 
   .site-nav {
     flex-wrap: wrap;
-    gap: 14px 18px;
+    gap: 14px 12px;
   }
 
   .site-nav a {
