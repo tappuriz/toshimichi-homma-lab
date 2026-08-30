@@ -337,6 +337,10 @@ html.skip-entry-motion .hero-line {
   margin-bottom: 34px;
 }
 
+.prose h3 {
+  margin-top: 0;
+}
+
 .prose p {
   margin: 0 0 1.15em;
   color: #454545;
@@ -475,7 +479,7 @@ html.skip-entry-motion .hero-line {
   }
 
   .content-grid {
-    gap: 36px;
+    gap: 16px;
   }
 
   .principle {
