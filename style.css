@@ -5,10 +5,21 @@
 
 :root {
   --bg: #f7f7f4;
+  --header-bg: rgba(247, 247, 244, 0.94);
+  --surface: #ffffff;
+  --surface-muted: #ecece7;
+  --surface-hover: #f0f0ee;
+  --surface-card: rgba(255, 255, 255, 0.36);
   --text: #171717;
+  --text-body: #454545;
+  --text-secondary: #4f4f4f;
+  --text-card: #555555;
+  --text-strong: #303030;
   --muted: #686868;
   --line: #d9d9d3;
+  --line-strong: #cfcfc9;
   --accent: #183c34;
+  --shadow: rgba(23, 23, 23, 0.12);
   --max-width: 1120px;
 }
 
@@ -56,7 +67,7 @@ a {
 
 .site-header {
   border-bottom: 1px solid var(--line);
-  background: rgba(247, 247, 244, 0.94);
+  background: var(--header-bg);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -140,10 +151,14 @@ main {
   letter-spacing: 0.16em;
 }
 
-.hero-line {
-  display: block;
+.hero-line,
+html.with-entry-motion .reveal {
   opacity: 0;
   transform: translateY(18px);
+}
+
+.hero-line {
+  display: block;
 }
 
 html.with-hero-motion .hero-line {
@@ -162,8 +177,6 @@ html.with-hero-motion .hero-line:nth-child(2) {
 }
 
 html.with-entry-motion .reveal {
-  opacity: 0;
-  transform: translateY(18px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
@@ -215,7 +228,7 @@ html.skip-entry-motion .hero-line {
 .page-lead {
   max-width: 740px;
   margin: 20px 0 0;
-  color: #4f4f4f;
+  color: var(--text-secondary);
   font-size: clamp(1.05rem, 2vw, 1.28rem);
 }
 
@@ -233,17 +246,21 @@ html.skip-entry-motion .hero-line {
   min-height: 48px;
   padding: 10px 18px;
   border: 1px solid var(--text);
-  background: white;
+  background: var(--surface);
   color: var(--text);
   text-decoration: none;
   font-size: 0.94rem;
   transition: transform 0.25s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
-.button:hover {
-  background: #f0f0ee;
+.button:hover,
+.profile-link:hover {
   transform: translate(2px, -2px);
-  box-shadow: -2px 2px 0 rgba(23, 23, 23, 0.12);
+}
+
+.button:hover {
+  background: var(--surface-hover);
+  box-shadow: -2px 2px 0 var(--shadow);
 }
 
 .section {
@@ -252,7 +269,7 @@ html.skip-entry-motion .hero-line {
 }
 
 .section-muted {
-  background: #ecece7;
+  background: var(--surface-muted);
 }
 
 .section-heading {
@@ -286,7 +303,7 @@ html.skip-entry-motion .hero-line {
 .card {
   padding: 18px 22px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.36);
+  background: var(--surface-card);
   display: flex;
   flex-direction: column;
   transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
@@ -303,7 +320,7 @@ html.skip-entry-motion .hero-line {
 }
 
 .card p {
-  color: #555;
+  color: var(--text-card);
   margin-top: 0;
 }
 
@@ -343,7 +360,7 @@ html.skip-entry-motion .hero-line {
 
 .prose p {
   margin: 0 0 1.15em;
-  color: #454545;
+  color: var(--text-body);
   font-size: 1.04rem;
 }
 
@@ -361,7 +378,7 @@ html.skip-entry-motion .hero-line {
 .info-list li {
   padding: 16px 0;
   border-bottom: 1px solid var(--line);
-  color: #303030;
+  color: var(--text-strong);
 }
 
 .info-list strong {
@@ -370,11 +387,11 @@ html.skip-entry-motion .hero-line {
 
 .interest {
   padding: 30px 0;
-  border-top: 1px solid #cfcfc9;
+  border-top: 1px solid var(--line-strong);
 }
 
 .interest:last-child {
-  border-bottom: 1px solid #cfcfc9;
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .interest:has(> .info-list:last-child) {
@@ -405,10 +422,6 @@ html.skip-entry-motion .hero-line {
 
 .profile-link:last-child {
   border-bottom: 1px solid var(--line);
-}
-
-.profile-link:hover {
-  transform: translate(2px, -2px);
 }
 
 .profile-link strong,
