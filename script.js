@@ -54,7 +54,7 @@ const addOrganizationStructuredData = () => {
   const inLanguage = getPageLocale();
   const isEnglish = inLanguage === 'en';
   const langPrefix = isEnglish ? 'en/' : '';
-  const siteUrl = isEnglish ? new URL('en/', rootUrl).href : rootUrl;
+  const siteUrl = new URL(`${langPrefix}index.html`, rootUrl).href;
   const aboutUrl = new URL(`${langPrefix}about.html`, rootUrl).href;
   const seminarUrl = new URL(`${langPrefix}seminar.html`, rootUrl).href;
   const commonsUrl = new URL(`${langPrefix}commons.html`, rootUrl).href;
@@ -68,7 +68,7 @@ const addOrganizationStructuredData = () => {
   const pageDescription = document
     .querySelector('meta[name="description"]')
     ?.getAttribute('content');
-  const hommaId = `${rootUrl}#toshimichi-homma`;
+  const hommaId = `${new URL('index.html', rootUrl).href}#toshimichi-homma`;
   const labId = `${siteUrl}#toshimichi-homma-lab`;
   const seminarId = `${seminarUrl}#organization`;
   const commonsId = `${commonsUrl}#organization`;
