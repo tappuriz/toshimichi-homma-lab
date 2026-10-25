@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Management & AI Commons Osaka - ゆるLT会</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05070f;
+      --cyan-main: #00f2fe;
+      --cyan-sub: #4facfe;
+      --pink-main: #ff0844;
+      --pink-sub: #ffb199;
+      --gold: #ffe600;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+      background-color: var(--bg-dark);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .font-en {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Animated Perspective Cyber Grid */
+    .cyber-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(0, 242, 254, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 8, 68, 0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 15s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+
+    /* Ambient Glow Orbs */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      z-index: 0;
+      pointer-events: none;
+      animation: orbFloat 10s ease-in-out infinite alternate;
+    }
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: rgba(0, 242, 254, 0.22);
+      top: -120px;
+      left: -100px;
+    }
+    .orb-2 {
+      width: 550px;
+      height: 550px;
+      background: rgba(255, 8, 68, 0.22);
+      bottom: -120px;
+      right: -100px;
+      animation-delay: -5s;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, 40px) scale(1.15); }
+    }
+
+    /* Particle Canvas */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Keyframe Animations for Infographics */
+    @keyframes spinSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes spinReverse {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(0.4); opacity: 1; }
+      100% { transform: scale(2.1); opacity: 0; }
+    }
+    @keyframes pinBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes laserScan {
+      0% { transform: translateX(0); opacity: 0.35; }
+      50% { opacity: 1; }
+      100% { transform: translateX(260%); opacity: 0.35; }
+    }
+    @keyframes cardFloat1 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes cardFloat2 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes arrowSlide {
+      0%, 100% { transform: translateX(0); opacity: 0.6; }
+      50% { transform: translateX(12px); opacity: 1; }
+    }
+    @keyframes borderFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes gaugePulse {
+      0%, 100% { stroke-dashoffset: 65; filter: drop-shadow(0 0 6px currentColor); }
+      50% { stroke-dashoffset: 45; filter: drop-shadow(0 0 14px currentColor); }
+    }
+    @keyframes eventTitlePulse {
+      0%, 100% { transform: translateX(0) scale(1); }
+      50% { transform: translateX(10px) scale(1.035); }
+    }
+    @keyframes titleHalo {
+      0%, 100% { transform: scale(0.86); opacity: 0.3; }
+      50% { transform: scale(1.15); opacity: 0.8; }
+    }
+    @keyframes borderOrbit {
+      to { stroke-dashoffset: -100; }
+    }
+    @keyframes slideEnter {
+      from { opacity: 0; transform: translateX(38px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes venueSweep {
+      0%, 32% { transform: translateX(-140%) skewX(-22deg); opacity: 0; }
+      42% { opacity: 0.75; }
+      58% { opacity: 0.75; }
+      68%, 100% { transform: translateX(420%) skewX(-22deg); opacity: 0; }
+    }
+
+    .hud-spin {
+      transform-origin: center;
+      animation: spinSlow 14s linear infinite;
+    }
+    .hud-spin-rev {
+      transform-origin: center;
+      animation: spinReverse 9s linear infinite;
+    }
+    .clock-hand-min {
+      transform-origin: 50px 50px;
+      animation: spinSlow 6s linear infinite;
+    }
+    .clock-hand-hour {
+      transform-origin: 50px 50px;
+      animation: spinSlow 36s linear infinite;
+    }
+    .radar-wave-1 {
+      transform-origin: 50px 76px;
+      animation: pulseRing 2.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    }
+    .radar-wave-2 {
+      transform-origin: 50px 76px;
+      animation: pulseRing 2.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 1.2s;
+    }
+    .pin-anim {
+      animation: pinBounce 2s ease-in-out infinite;
+    }
+    .duration-arc {
+      stroke-dasharray: 220;
+      stroke-dashoffset: 60;
+      animation: gaugePulse 3s ease-in-out infinite;
+    }
+    .event-title {
+      position: relative;
+      transform-origin: left center;
+      animation: eventTitlePulse 2.4s ease-in-out infinite;
+    }
+    .event-title::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -28%;
+      left: -4%;
+      width: 75%;
+      height: 150%;
+      border-radius: 999px;
+      background: radial-gradient(ellipse, rgba(0, 242, 254, 0.3), transparent 70%);
+      filter: blur(12px);
+      animation: titleHalo 2.4s ease-in-out infinite;
+    }
+    .card-12 .event-title::before {
+      background: radial-gradient(ellipse, rgba(255, 8, 68, 0.32), transparent 70%);
+    }
+    .date-info {
+      position: relative;
+      overflow: hidden;
+    }
+    .date-border {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .date-border rect {
+      stroke: currentColor;
+      stroke-dasharray: 14 86;
+      stroke-dashoffset: 0;
+      filter: drop-shadow(0 0 6px currentColor);
+      animation: borderOrbit 3.6s linear infinite;
+    }
+    .venue-info {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+    .venue-info:hover,
+    .venue-info:focus-visible {
+      border-color: #ff0844;
+      box-shadow: 0 0 30px rgba(255, 8, 68, 0.35), inset 0 0 35px rgba(255, 8, 68, 0.08);
+    }
+    .venue-info:focus-visible {
+      outline: 3px solid #ffe600;
+      outline-offset: 4px;
+    }
+    .venue-name {
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.14em;
+    }
+    .venue-link-hint {
+      color: #ffb199;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+    .venue-info::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      top: -20%;
+      left: 0;
+      width: 25%;
+      height: 140%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+      animation: venueSweep 5.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .venue-info > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Card Styling */
+    .card-12 {
+      background: linear-gradient(155deg, rgba(40, 12, 28, 0.88) 0%, rgba(22, 7, 16, 0.94) 100%);
+      border: 3px solid rgba(255, 8, 68, 0.55);
+      box-shadow: 0 0 45px rgba(255, 8, 68, 0.2), inset 0 0 35px rgba(255, 8, 68, 0.08);
+      animation: cardFloat2 6s ease-in-out infinite 3s;
+    }
+    .card-12:hover {
+      border-color: #ff0844;
+      box-shadow: 0 0 65px rgba(255, 8, 68, 0.4), inset 0 0 45px rgba(255, 8, 68, 0.15);
+    }
+
+    /* Laser Line over QR */
+    .laser-line-pink {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 28%;
+      height: 3px;
+      background: #ff0844;
+      box-shadow: 0 0 15px 4px #ff0844;
+      animation: laserScan 2.6s ease-in-out infinite 1.3s;
+      pointer-events: none;
+    }
+    .scan-label-wrap {
+      position: relative;
+      padding-top: 0.5rem;
+    }
+    .qr-code {
+      overflow: visible;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .qr-code:hover,
+    .qr-code:focus-visible {
+      transform: scale(1.035);
+      box-shadow: 0 0 42px rgba(255, 8, 68, 0.85);
+    }
+    .qr-code:focus-visible {
+      outline: 3px solid #ffe600;
+      outline-offset: 5px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      #particle-canvas {
+        display: none;
+      }
+    }
+
+    /* Corner Brackets for HUD look */
+    .hud-corner {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      pointer-events: none;
+    }
+    .tl { top: 14px; left: 14px; border-top: 4px solid currentColor; border-left: 4px solid currentColor; border-top-left-radius: 8px; }
+    .tr { top: 14px; right: 14px; border-top: 4px solid currentColor; border-right: 4px solid currentColor; border-top-right-radius: 8px; }
+    .bl { bottom: 14px; left: 14px; border-bottom: 4px solid currentColor; border-left: 4px solid currentColor; border-bottom-left-radius: 8px; }
+    .br { bottom: 14px; right: 14px; border-bottom: 4px solid currentColor; border-right: 4px solid currentColor; border-bottom-right-radius: 8px; }
+
+    /* Glowing Text Shadows */
+    .glow-cyan {
+      text-shadow: 0 0 25px rgba(0, 242, 254, 0.75), 0 0 8px rgba(0, 242, 254, 0.5);
+    }
+    .glow-pink {
+      text-shadow: 0 0 25px rgba(255, 8, 68, 0.8), 0 0 8px rgba(255, 8, 68, 0.5);
+    }
+    .glow-gold {
+      text-shadow: 0 0 20px rgba(255, 230, 0, 0.65);
+    }
+
+    body.presentation-mode {
+      padding: 0;
+      overflow: hidden;
+      align-items: stretch;
+      justify-content: stretch;
+      min-height: 100svh;
+      height: 100svh;
+    }
+    body.presentation-mode > .relative {
+      width: 100vw;
+      max-width: none;
+      height: 100svh;
+    }
+    body.presentation-mode #event-cards {
+      height: 100%;
+    }
+    body.presentation-mode #event-header {
+      display: none;
+    }
+    body.presentation-mode #event-cards {
+      display: block;
+    }
+    body.presentation-mode .event-card {
+      display: none;
+      min-height: 100svh;
+      height: 100svh;
+      border-radius: 0;
+    }
+    body.presentation-mode .event-card.is-active {
+      display: flex;
+      animation: slideEnter 0.42s ease-out both;
+    }
+    body.presentation-mode .card-12 {
+      animation: none;
+    }
+    body.presentation-mode .qr-code {
+      width: var(--qr-size, min(20rem, 28svh));
+      height: var(--qr-size, min(20rem, 28svh));
+    }
+    body.presentation-mode:fullscreen .qr-code {
+      --qr-size: min(24rem, 34svh);
+    }
+    body.presentation-mode .event-card {
+      padding: 1.25rem !important;
+      gap: 1rem !important;
+      justify-content: space-evenly !important;
+    }
+    body.presentation-mode .event-card > .flex.flex-col.gap-6 {
+      gap: 0.75rem !important;
+    }
+    body.presentation-mode .date-info,
+    body.presentation-mode .venue-info {
+      gap: 0.75rem !important;
+      padding: 0.75rem !important;
+    }
+    body.presentation-mode .date-info > div:first-child,
+    body.presentation-mode .venue-info > div:first-child {
+      width: 5rem !important;
+      height: 5rem !important;
+    }
+    body.presentation-mode .community-name {
+      font-size: 3rem !important;
+    }
+    body.presentation-mode .event-title > span:first-child {
+      font-size: 2.5rem !important;
+    }
+    body.presentation-mode .event-number {
+      font-size: 4.5rem !important;
+    }
+    body.presentation-mode .event-badge {
+      width: 9rem !important;
+      height: 9rem !important;
+    }
+    body.presentation-mode .event-card > .flex.items-center.justify-between {
+      padding-left: 2rem;
+    }
+
+    @media (max-height: 800px) {
+      body.presentation-mode .event-card {
+        padding: 1rem;
+        gap: 0.75rem;
+      }
+      body.presentation-mode .event-card > .flex.flex-col.gap-6 {
+        gap: 0.75rem;
+      }
+      body.presentation-mode .date-info,
+      body.presentation-mode .venue-info {
+        gap: 0.75rem;
+        padding: 0.875rem;
+      }
+      body.presentation-mode .date-info > div:first-child,
+      body.presentation-mode .venue-info > div:first-child {
+        width: 5rem;
+        height: 5rem;
+      }
+      body.presentation-mode .qr-code {
+        width: var(--qr-size, 11rem);
+        height: var(--qr-size, 11rem);
+      }
+    }
+
+    @media (max-width: 767px) {
+      body.presentation-mode {
+        display: block;
+        min-height: 100svh;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      body.presentation-mode > .relative,
+      body.presentation-mode #event-cards {
+        min-height: 100svh;
+        height: auto;
+      }
+      body.presentation-mode .event-card {
+        min-height: 100svh;
+        height: auto;
+        padding: 0.75rem !important;
+        gap: 0.75rem !important;
+        justify-content: flex-start !important;
+        overflow: visible !important;
+      }
+      body.presentation-mode .community-name {
+        font-size: 1.5rem !important;
+      }
+      body.presentation-mode .event-title > span:first-child {
+        font-size: 2rem !important;
+      }
+      body.presentation-mode .event-number {
+        font-size: 3.5rem !important;
+      }
+      body.presentation-mode .event-badge {
+        width: 5rem !important;
+        height: 5rem !important;
+      }
+      body.presentation-mode .event-card > .flex.items-center.justify-between {
+        padding-left: 2rem;
+      }
+      body.presentation-mode .date-info,
+      body.presentation-mode .venue-info {
+        gap: 0.625rem !important;
+        padding: 0.625rem !important;
+      }
+      body.presentation-mode .date-info > div:first-child,
+      body.presentation-mode .venue-info > div:first-child {
+        width: 3.75rem !important;
+        height: 3.75rem !important;
+      }
+      body.presentation-mode .qr-registration {
+        grid-template-columns: 1fr !important;
+        justify-items: center;
+        gap: 0.75rem !important;
+        padding: 0.75rem !important;
+      }
+      body.presentation-mode .qr-registration > div:first-child {
+        justify-content: center;
+      }
+      body.presentation-mode .scan-label {
+        font-size: clamp(1.25rem, 7vw, 1.75rem) !important;
+      }
+      body.presentation-mode .qr-code {
+        width: var(--qr-size, min(9rem, 38vw)) !important;
+        height: var(--qr-size, min(9rem, 38vw)) !important;
+      }
+    }
+  </style>
+</head>
+<body class="presentation-mode">
+
+  <!-- Background Decorations -->
+  <div class="cyber-grid"></div>
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Fullscreen Toggle Button (Corner Decoration) -->
+  <button id="fullscreen-btn" onclick="toggleFullScreen()" title="フルスクリーン切替" class="fixed top-4 right-4 z-50 bg-slate-900/80 hover:bg-slate-800 text-white/80 hover:text-white border-2 border-white/20 rounded-2xl p-3 backdrop-blur-md transition-all shadow-lg">
+    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+    </svg>
+  </button>
+
+  <!-- Main Infographic Wrapper -->
+  <div class="relative z-10 w-full max-w-[1440px] flex flex-col gap-6 lg:gap-8">
+
+    <!-- ==================== HEADER ==================== -->
+    <header id="event-header" class="text-center flex flex-col items-center">
+      <!-- Animated MAICO Badge -->
+      <div class="inline-flex items-center gap-4 px-7 py-2.5 rounded-full bg-slate-900/90 border-2 border-cyan-400/50 shadow-[0_0_30px_rgba(0,242,254,0.3)] mb-3">
+        <!-- Animated Sparkle SVG -->
+        <svg class="w-8 h-8 text-yellow-300 hud-spin" viewBox="0 0 64 64" fill="none">
+          <path d="M32 4L38 26L60 32L38 38L32 60L26 38L4 32L26 26L32 4Z" fill="currentColor"/>
+          <circle cx="32" cy="32" r="24" stroke="#00f2fe" stroke-width="2" stroke-dasharray="6 6"/>
+        </svg>
+        <span class="font-en text-2xl sm:text-3xl font-black tracking-[0.25em] bg-gradient-to-r from-cyan-300 via-white to-pink-400 bg-clip-text text-transparent">
+          MAICO
+        </span>
+        <!-- Animated AI Wave SVG -->
+        <svg class="w-8 h-8 text-pink-500" viewBox="0 0 64 64" fill="none">
+          <rect x="8" y="22" width="8" height="20" rx="4" fill="currentColor">
+            <animate attributeName="height" values="16;44;16" dur="1.2s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="24;10;24" dur="1.2s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="22" y="10" width="8" height="44" rx="4" fill="#00f2fe">
+            <animate attributeName="height" values="44;18;44" dur="1s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="10;23;10" dur="1s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="36" y="18" width="8" height="28" rx="4" fill="currentColor">
+            <animate attributeName="height" values="20;48;20" dur="1.4s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="22;8;22" dur="1.4s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="50" y="24" width="8" height="16" rx="4" fill="#ffe600">
+            <animate attributeName="height" values="36;14;36" dur="1.1s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="14;25;14" dur="1.1s" repeatCount="indefinite"/>
+          </rect>
+        </svg>
+      </div>
+
+      <!-- Community Title & Giant LT Title -->
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 px-2">
+        <h1 class="font-en text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]">
+          Management &amp; AI Commons Osaka
+        </h1>
+        <span class="px-6 py-2 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-pink-500 text-slate-950 font-black text-3xl sm:text-5xl lg:text-6xl shadow-[0_0_35px_rgba(255,8,68,0.6)] transform -rotate-2">
+          ゆるLT会
+        </span>
+      </div>
+    </header>
+
+    <!-- ==================== EVENT INFOGRAPHIC CARD ==================== -->
+    <main id="event-cards" class="grid grid-cols-1 gap-8 lg:gap-10 items-stretch">
+
+      <!-- ==================== EVENT #12 (NEON MAGENTA / ORANGE) ==================== -->
+      <section class="event-card card-12 relative rounded-[40px] p-6 sm:p-9 flex flex-col justify-between gap-7 backdrop-blur-xl overflow-hidden text-pink-500">
+        <!-- HUD Corner Decos -->
+        <div class="hud-corner tl"></div>
+        <div class="hud-corner tr"></div>
+        <div class="hud-corner bl"></div>
+        <div class="hud-corner br"></div>
+
+        <!-- Top Badge Bar: Title & Animated HUD Ring -->
+        <div class="flex items-center justify-between border-b-2 border-pink-500/25 pb-5 gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="community-name font-en text-3xl sm:text-4xl lg:text-5xl font-black tracking-wide text-white">Management &amp; AI Commons Osaka</span>
+            <div class="event-title flex items-baseline gap-4 flex-wrap">
+              <span class="text-white text-4xl sm:text-5xl font-black tracking-wider">ゆるLT会</span>
+              <span class="event-number font-en text-6xl sm:text-8xl font-black text-pink-400 glow-pink leading-none" data-event-number="12">#12</span>
+            </div>
+          </div>
+
+          <!-- Animated Rotating HUD Infographic Badge -->
+          <div class="event-badge relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-full h-full" viewBox="0 0 120 120">
+              <!-- Outer Dashed Ring -->
+              <circle class="hud-spin" cx="60" cy="60" r="54" fill="none" stroke="#ff0844" stroke-width="3" stroke-dasharray="18 10 6 10"/>
+              <!-- Inner Reverse Ring -->
+              <circle class="hud-spin-rev" cx="60" cy="60" r="42" fill="none" stroke="#ffb199" stroke-width="2.5" stroke-dasharray="28 14"/>
+              <!-- Center Glowing Hexagon -->
+              <polygon points="60,28 87,44 87,76 60,92 33,76 33,44" fill="rgba(255,8,68,0.18)" stroke="#ff0844" stroke-width="2.5"/>
+              <!-- Flame / Spark Icon Inside -->
+              <path d="M60 34C60 34 77 48 75 66C73.5 78 63 84 60 84C57 84 46.5 78 45 66C43.5 54 53 46 53 46C53 46 51 56 58 58C55 48 60 34 60 34Z" fill="#ffe600"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Middle Infographic Blocks -->
+        <div class="flex flex-col gap-6">
+
+          <!-- DATE & TIME INFOGRAPHIC -->
+          <div class="date-info flex flex-col sm:flex-row items-start sm:items-center gap-5 bg-rose-950/40 border-2 border-pink-500/35 rounded-3xl p-5 shadow-inner">
+            <svg class="date-border" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <rect x="1.5" y="1.5" width="97" height="97" rx="7" fill="none" stroke-width="2" vector-effect="non-scaling-stroke" pathLength="100"/>
+            </svg>
+            <!-- Animated Clock & 90min Gauge SVG -->
+            <div class="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 relative flex items-center justify-center bg-slate-950/80 rounded-2xl border border-pink-500/40 p-2">
+              <svg class="w-full h-full text-pink-500" viewBox="0 0 100 100">
+                <!-- Background Track -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,8,68,0.15)" stroke-width="8"/>
+                <!-- Animated 90min Gauge Arc -->
+                <circle class="duration-arc" cx="50" cy="50" r="40" fill="none" stroke="#ff0844" stroke-width="8" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                <!-- Clock Ticks -->
+                <circle cx="50" cy="50" r="28" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-dasharray="2 12.6"/>
+                <!-- Animated Hands -->
+                <line class="clock-hand-hour" x1="50" y1="50" x2="50" y2="30" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+                <line class="clock-hand-min" x1="50" y1="50" x2="70" y2="50" stroke="#ffe600" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="5" fill="#ff0844"/>
+              </svg>
+            </div>
+
+            <!-- Huge Date & Time Text -->
+            <div class="flex flex-col gap-2 w-full">
+              <div class="flex items-center flex-wrap gap-3">
+                <span class="text-white text-3xl sm:text-5xl font-black tracking-tight leading-none">
+                  2026年11月2日
+                </span>
+                <span class="px-4 py-1 rounded-xl bg-pink-500 text-white text-2xl sm:text-4xl font-black shadow-[0_0_20px_rgba(255,8,68,0.8)]">
+                  月
+                </span>
+              </div>
+              <div class="font-en text-4xl sm:text-5xl font-black text-yellow-300 glow-gold tracking-wide leading-none mt-1">
+                18:30 ~ 20:00
+              </div>
+            </div>
+          </div>
+
+          <!-- VENUE INFOGRAPHIC -->
+          <a href="https://maps.app.goo.gl/11vBzZSJQRsuZGqf7" target="_blank" rel="noopener noreferrer" aria-label="大阪経済大学 北浜キャンパスの地図を開く" class="venue-info flex flex-col sm:flex-row items-start sm:items-center gap-5 bg-rose-950/40 border-2 border-pink-500/35 rounded-3xl p-5 shadow-inner no-underline">
+            <!-- Animated Radar & Bouncing Map Pin SVG -->
+            <div class="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 relative flex items-center justify-center bg-slate-950/80 rounded-2xl border border-pink-500/40 p-2">
+              <svg class="w-full h-full" viewBox="0 0 100 100">
+                <!-- Pulsing Radar Rings -->
+                <ellipse class="radar-wave-1" cx="50" cy="76" rx="22" ry="9" fill="none" stroke="#ff0844" stroke-width="3"/>
+                <ellipse class="radar-wave-2" cx="50" cy="76" rx="22" ry="9" fill="none" stroke="#ff0844" stroke-width="3"/>
+                <ellipse cx="50" cy="76" rx="10" ry="4" fill="#ff0844" opacity="0.5"/>
+                <!-- Bouncing Pin -->
+                <g class="pin-anim">
+                  <path d="M50 14C35.6 14 24 25.6 24 40C24 58.5 50 76 50 76C50 76 76 58.5 76 40C76 25.6 64.4 14 50 14Z" fill="#ff0844" stroke="#ffffff" stroke-width="3"/>
+                  <circle cx="50" cy="39" r="10" fill="#05070f"/>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Huge Venue Text -->
+            <div class="flex flex-col gap-1 text-white">
+              <div class="venue-name text-3xl sm:text-5xl font-black leading-tight">
+                大阪経済大学
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="venue-name text-3xl sm:text-5xl font-black text-orange-300 glow-pink leading-tight">
+                  北浜キャンパス
+                </div>
+                <span class="venue-link-hint" aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- Bottom QR Code Scanner Box -->
+        <div class="qr-registration grid grid-cols-[1fr_auto_1fr] items-center gap-4 bg-slate-950/90 border-2 border-pink-500/50 rounded-3xl p-5">
+          <div class="flex items-center gap-3 sm:gap-5">
+            <div class="scan-label-wrap flex flex-col">
+              <div class="laser-line-pink" aria-hidden="true"></div>
+              <span class="scan-label font-en text-3xl sm:text-5xl font-black text-pink-400 glow-pink tracking-widest">
+                SCAN OR TAP
+              </span>
+              <!-- Decorative Progress Bars -->
+              <div class="flex gap-2 mt-2">
+                <span class="h-3 w-12 rounded-full bg-pink-500 animate-pulse"></span>
+                <span class="h-3 w-8 rounded-full bg-pink-500/60"></span>
+                <span class="h-3 w-4 rounded-full bg-pink-500/30"></span>
+              </div>
+            </div>
+            <svg class="w-12 h-12 sm:w-16 sm:h-16 text-pink-500" style="animation: arrowSlide 1.3s ease-in-out infinite;" viewBox="0 0 64 64" fill="none">
+              <path d="M16 14L34 32L16 50" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M34 14L52 32L34 50" stroke="#ffe600" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <a href="https://oue-meetup.connpass.com/event/408749/" target="_blank" rel="noopener noreferrer" aria-label="第12回イベントのConnpass申込ページを開く" class="qr-code relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 bg-white rounded-2xl p-1.5 cursor-pointer shadow-[0_0_30px_rgba(255,8,68,0.6)] flex-shrink-0 group">
+            <div id="qr-slot-12" class="w-full h-full flex items-center justify-center">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAADYAQMAAACz7r+uAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABVUlEQVRYhe2YTRaDIAyEhxXH4KYCN+UYrqDJRK1tt13MwjyeWj4XJG/yY4HHHvub5WU27bqXBmxA9Y2hx/xmW2mthtLX2M5NNVb9d+nhQx5bNpdkGepeLMbugzijMvoOWUZNeKwniu3+6kWDRY6N7Vy/+SfBcLzRfNGBb9NgmXpFMcBygI9Y6zBXre366dNumWbFa9hVjtnRTbUMtD9E2YIeoyWK1VhkWrtircRS1FPcAi3I7EbVTooYHut77xdiduirra54zooMMZrkSDPrrJKMFo1/UROJw4ocyyOWY8+xI/p6zI/OuWSdgvD6JcmsSPl1eTOwTPO6IMg6j24r5pUQhxw7lbGxci2+0aDHYuYDhRtDgCgbiPmJkzR9GOnrW1SDHUX/He6bD3qsnh94/d771RhKyGJyZKlLkYFzSWPpT+wEMwsy5lgON+Ifk8uU2GOP/cVecoCV0F9wrSIAAAAASUVORK5CYII=" alt="2026年11月2日イベント申込用QRコード" class="h-full w-full object-contain">
+            </div>
+          </a>
+          <div aria-hidden="true"></div>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function animateEventNumber(slide) {
+      const number = slide.querySelector('.event-number');
+      const target = Number(number.dataset.eventNumber);
+      if (motionPreference.matches) {
+        number.textContent = `#${target}`;
+        return;
+      }
+      const duration = 650;
+      const startTime = performance.now();
+
+      function step(currentTime) {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        number.textContent = `#${Math.round(target * progress)}`;
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      number.textContent = '#0';
+      requestAnimationFrame(step);
+    }
+
+    function fitSlideToViewport(slide) {
+      const qrCode = slide.querySelector('.qr-code');
+      qrCode.style.removeProperty('--qr-size');
+
+      requestAnimationFrame(() => {
+        const overflow = slide.scrollHeight - slide.clientHeight;
+        if (overflow > 0) {
+          const fittedSize = Math.max(96, qrCode.getBoundingClientRect().height - overflow - 16);
+          qrCode.style.setProperty('--qr-size', `${fittedSize}px`);
+        }
+      });
+    }
+
+    async function toggleFullScreen() {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        try {
+          await document.documentElement.requestFullscreen();
+        } catch (error) {
+          console.error('Failed to start presentation fullscreen mode.', error);
+        }
+      }
+    }
+
+    const slide = document.querySelector('.event-card');
+    slide.classList.add('is-active');
+    animateEventNumber(slide);
+    fitSlideToViewport(slide);
+
+    document.addEventListener('fullscreenchange', () => {
+      fitSlideToViewport(slide);
+    });
+
+    window.addEventListener('resize', () => fitSlideToViewport(slide));
+
+    const particleCanvas = document.getElementById('particle-canvas');
+    const particleContext = particleCanvas.getContext('2d');
+    let particles = [];
+    let particleFrame = 0;
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+
+    function resizeParticleCanvas() {
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvasWidth = window.innerWidth;
+      canvasHeight = window.innerHeight;
+      particleCanvas.width = Math.round(canvasWidth * pixelRatio);
+      particleCanvas.height = Math.round(canvasHeight * pixelRatio);
+      particleContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const count = Math.max(24, Math.min(70, Math.round((canvasWidth * canvasHeight) / 18000)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * canvasWidth,
+        y: Math.random() * canvasHeight,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 1.8 + 0.7
+      }));
+    }
+
+    function drawParticles() {
+      particleContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      for (let index = 0; index < particles.length; index += 1) {
+        const particle = particles[index];
+        particle.x = (particle.x + particle.vx + canvasWidth) % canvasWidth;
+        particle.y = (particle.y + particle.vy + canvasHeight) % canvasHeight;
+
+        particleContext.beginPath();
+        particleContext.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        particleContext.fillStyle = 'rgba(255, 177, 153, 0.72)';
+        particleContext.fill();
+
+        for (let otherIndex = index + 1; otherIndex < particles.length; otherIndex += 1) {
+          const other = particles[otherIndex];
+          const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
+          if (distance < 110) {
+            particleContext.beginPath();
+            particleContext.moveTo(particle.x, particle.y);
+            particleContext.lineTo(other.x, other.y);
+            particleContext.strokeStyle = `rgba(255, 8, 68, ${(1 - distance / 110) * 0.22})`;
+            particleContext.lineWidth = 0.7;
+            particleContext.stroke();
+          }
+        }
+      }
+
+      particleFrame = requestAnimationFrame(drawParticles);
+    }
+
+    function updateMotionPreference() {
+      document.querySelectorAll('svg').forEach((svg) => {
+        if (motionPreference.matches) {
+          svg.pauseAnimations?.();
+        } else {
+          svg.unpauseAnimations?.();
+        }
+      });
+
+      if (motionPreference.matches || document.hidden) {
+        cancelAnimationFrame(particleFrame);
+        particleFrame = 0;
+      } else if (!particleFrame) {
+        drawParticles();
+      }
+    }
+
+    resizeParticleCanvas();
+    motionPreference.addEventListener('change', updateMotionPreference);
+    document.addEventListener('visibilitychange', updateMotionPreference);
+    window.addEventListener('resize', () => {
+      resizeParticleCanvas();
+      fitSlideToViewport(slide);
+    });
+    updateMotionPreference();
+  </script>
+</body>
+</html>
